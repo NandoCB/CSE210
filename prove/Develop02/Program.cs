@@ -1,11 +1,12 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
+//using System.Collections.Generic;
+//using System.IO;
 
 class Program
 {
-    static Random random = new Random();
-    static List<string> messages = new List<string>
+    
+    private static Random _random = new Random();        //objeto Random para generar lista de mensajes aleatorios
+    private static List<string> _messages = new List<string>
     {
         "Who was the most interesting person I interacted with today?",
         "What was the best part of my day?",
@@ -16,10 +17,12 @@ class Program
 
     static void Main()
     {
-        List<string> entries = new List<string>();
+        
+        List<string> entries = new List<string>();     //lista para almacenar las entradas del diario.
 
         while (true)
         {
+        
             Console.WriteLine("Diary Menu:");
             Console.WriteLine("1. Add an entry");
             Console.WriteLine("2. View entries");
@@ -35,16 +38,19 @@ class Program
             switch (choice)
             {
                 case "1":
-                    string randomMessage = GetRandomMessage();
+                    
+                    string randomMessage = GetRandomMessage();   //mensaje aleatorio
                     string currentDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                     Console.WriteLine($"{currentDate}\n{randomMessage}");
                     Console.Write("Write your diary entry: ");
                     string entry = Console.ReadLine();
-                    entries.Add($"{currentDate}\n{randomMessage}\n{entry}\n");
+                    
+                    entries.Add($"{currentDate}\n{randomMessage}\n{entry}\n");   //entrada al diario
                     break;
 
                 case "2":
-                    Console.WriteLine("Diary Entries:\n");
+                    
+                    Console.WriteLine("Diary Entries:\n");     //entradas almacenadas en el diario.
                     foreach (var item in entries)
                     {
                         Console.WriteLine(item);
@@ -52,16 +58,18 @@ class Program
                     break;
 
                 case "3":
-                    Console.Write("Enter a filename to save the journal: ");
+                    
+                    Console.Write("Enter a filename to save the journal: ");    //Solicitud de nombre de archivo
                     string saveFileName = Console.ReadLine();
-                    File.WriteAllLines(saveFileName, entries);
+                    File.WriteAllLines(saveFileName, entries);    //guarda entradas en archivo.
                     Console.WriteLine("Journal saved successfully.");
                     break;
 
                 case "4":
-                    Console.Write("Enter a filename to load the journal: ");
+                    
+                    Console.Write("Enter a filename to load the journal: ");  //Solicita a usuario nombre de archivo
                     string loadFileName = Console.ReadLine();
-                    if (File.Exists(loadFileName))
+                    if (File.Exists(loadFileName))     //carga la entrada desde archivo si existe.
                     {
                         entries = new List<string>(File.ReadAllLines(loadFileName));
                         Console.WriteLine("Journal loaded successfully.");
@@ -73,9 +81,10 @@ class Program
                     break;
 
                 case "5":
+                    
                     if (entries.Count > 0)
                     {
-                        entries.RemoveAt(entries.Count - 1);
+                        entries.RemoveAt(entries.Count - 1);  //Elimina la última entrada (Previo a opción 3)
                         Console.WriteLine("Last entry deleted.");
                     }
                     else
@@ -85,11 +94,13 @@ class Program
                     break;
 
                 case "6":
-                    entries.Clear();
+                    
+                    entries.Clear();    //Borramos todas las entradas  INCOMPLETO
                     Console.WriteLine("Journal cleared.");
                     break;
 
                 case "7":
+                                            //Salimos del programa.
                     Environment.Exit(0);
                     break;
 
@@ -100,9 +111,10 @@ class Program
         }
     }
 
-    static string GetRandomMessage()
+    
+    private static string GetRandomMessage()   //Obtención de mensaje aleatorio
     {
-        int randomIndex = random.Next(messages.Count);
-        return messages[randomIndex];
+        int randomIndex = _random.Next(_messages.Count);
+        return _messages[randomIndex];
     }
 }
