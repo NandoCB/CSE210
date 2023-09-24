@@ -1,7 +1,16 @@
 using System;
-//using System.Collections.Generic;
-//using System.IO;
 
+/**
+class Entry
+{                   tres propiedades: fecha, mensaje aleatorio, respuesta del uruario
+    public DateTime Date { get; set;  }
+    public string Message { get; set; }
+    public string text { get; srt; }
+}
+ 
+class Jornal
+
+**/
 class Program
 {
     
@@ -18,7 +27,7 @@ class Program
     static void Main()
     {
         
-        List<string> entries = new List<string>();     //lista para almacenar las entradas del diario.
+        List<string> entries = new List<string>();     //lista para almacenar las entradas del diario.   (A eliminar)
 
         while (true)
         {
