@@ -50,7 +50,14 @@ class Program
                     string loadFileName = Console.ReadLine();
                     if (File.Exists(loadFileName))
                     {
-                        myJournal.LoadFromFile(loadFileName);
+                        Console.WriteLine("Journal Contents:");
+                        string[] fileContents = File.ReadAllLines(loadFileName);
+                        foreach (string line in fileContents)
+                        
+
+                        {
+                            Console.WriteLine(line);
+                        }
                         Console.WriteLine("Journal loaded successfully.");
                     }
                     else
